@@ -1,0 +1,12 @@
+﻿.right-nav {
+    justify-content: flex-end;
+    padding-right: 10%;
+}
+
+.left-nav {
+    padding-left: 10%;
+}
+
+.nav-item {
+    margin: 0 0.35rem;
+}
