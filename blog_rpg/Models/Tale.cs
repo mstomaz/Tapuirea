@@ -14,9 +14,10 @@
         }
 
         public int Id { get; init; }
-        public User Author { get; set; }
-        public string Title { get; set; }
-        public string Story { get; set; }
+        public User? Author { get; set; }
+        public int AuthorId { get; set; }
+        public string Title { get; set; } = null!;
+        public string Story { get; set; } = null!;
         public DateTime PostDate { get; init; }
         public DateTime EditDate { get; private set; }
     }
