@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using blog_rpg.Data;
+using blog_rpg.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using blog_rpg.Data;
-using blog_rpg.Models;
 
 namespace blog_rpg.Controllers
 {
@@ -46,6 +42,7 @@ namespace blog_rpg.Controllers
         }
 
         // GET: Tales/Create
+        [Route("/Tales/Create", Name = "talecreation")]
         public IActionResult Create()
         {
             ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");

@@ -14,7 +14,7 @@
         }
 
         public int Id { get; init; }
-        public User? Author { get; set; }
+        public User Author { get; set; }
         public int AuthorId { get; set; }
         public string Title { get; set; } = null!;
         public string Story { get; set; } = null!;

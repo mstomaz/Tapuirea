@@ -11,6 +11,7 @@ namespace blog_rpg
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<SeedingService>();
             builder.Services.AddDbContext<BlogContext>(options =>
             options.UseMySql(
                 builder.Configuration.GetConnectionString("MySqlConnection"),
@@ -18,6 +19,16 @@ namespace blog_rpg
             ));
 
             var app = builder.Build();
+
+            if (app.Environment.IsDevelopment())
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var context = scope.ServiceProvider.GetRequiredService<BlogContext>();
+                    var seedingService = new SeedingService(context);
+                    seedingService.Seed();
+                }
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

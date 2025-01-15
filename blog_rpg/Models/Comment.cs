@@ -13,7 +13,7 @@
         }
 
         public int Id { get; init; }
-        public User? Author { get; set; }
+        public User Author { get; set; }
         public int AuthorId { get; set; }
         public string Content { get; set; } = null!;
         public DateTime PostDate { get; init; }
