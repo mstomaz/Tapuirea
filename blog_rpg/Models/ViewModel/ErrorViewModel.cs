@@ -1,4 +1,4 @@
-namespace blog_rpg.Models
+namespace blog_rpg.Models.ViewModel
 {
     public class ErrorViewModel
     {

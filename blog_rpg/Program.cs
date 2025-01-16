@@ -24,8 +24,7 @@ namespace blog_rpg
             {
                 using (var scope = app.Services.CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetRequiredService<BlogContext>();
-                    var seedingService = new SeedingService(context);
+                    var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
                     seedingService.Seed();
                 }
             }

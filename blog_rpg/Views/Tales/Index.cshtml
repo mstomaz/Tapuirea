@@ -1,59 +1,25 @@
-﻿@model IEnumerable<blog_rpg.Models.Tale>
+﻿@model TalesViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Contos";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-route="talecreation">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Story)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EditDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Story)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EditDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="center-view">
+    <div>
+        <h1 class="text-center">@ViewData["Title"]</h1>
+    </div>
+    @if (Model.User.Role == blog_rpg.Models.Enums.UserRole.Author || 1 == 1)
+    {
+        <div class="container-custom-out-spac btn">
+            <button asp-route="talecreation" type="button" value="Create">Adicionar novo conto</button>
+        </div>
+    }
+    <div class="tales-ext-container tales-border">
+        <div class="tales-int-container tales-border text-center">
+            @if (!Model.Tales.Any())
+            {
+                <p>Estranho... não há nada aqui!</p>
+            }
+        </div>
+    </div>
+</div>

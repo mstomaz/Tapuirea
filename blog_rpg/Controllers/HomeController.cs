@@ -1,4 +1,4 @@
-using blog_rpg.Models;
+using blog_rpg.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

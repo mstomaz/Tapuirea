@@ -10,3 +10,30 @@
 .nav-item {
     margin: 0 0.35rem;
 }
+
+.container-custom-out-spac {
+    margin-top: 8rem;
+}
+
+.center-view {
+    margin: 0 3rem 0 3rem;
+}
+
+.tales-ext-container {
+    padding: 1rem 0 4rem 0;
+    margin-top: 2rem;
+}
+
+.tales-int-container {
+    background-color: #ead8c1;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.tales-border {
+    border: 3px solid;
+}
+
+.center-btn {
+    align-items: center;
+}

@@ -1,5 +1,6 @@
 ﻿using blog_rpg.Data;
 using blog_rpg.Models;
+using blog_rpg.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,17 @@ namespace blog_rpg.Controllers
         }
 
         // GET: Tales
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var blogContext = _context.Tales.Include(t => t.Author);
-            return View(await blogContext.ToListAsync());
+            var user = _context.Users.FirstOrDefault()!;
+            var tales = _context.Tales.ToList();
+
+            var viewModel = new TalesViewModel
+            {
+                Tales = tales.Count > 0 ? tales : [],
+                User = user
+            };
+            return View(viewModel);
         }
 
         // GET: Tales/Details/5
