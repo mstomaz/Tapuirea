@@ -3,6 +3,6 @@
     public class TalesViewModel
     {
         public User User { get; set; } = null!;
-        public ICollection<Tale> Tales { get; set; } = null!;
+        public IEnumerable<Tale> Tales { get; set; } = null!;
     }
 }

@@ -1,4 +1,5 @@
 using blog_rpg.Data;
+using blog_rpg.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace blog_rpg
@@ -12,6 +13,8 @@ namespace blog_rpg
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<SeedingService>();
+            builder.Services.AddScoped<TaleService>();
+            builder.Services.AddScoped<UserService>();
             builder.Services.AddDbContext<BlogContext>(options =>
             options.UseMySql(
                 builder.Configuration.GetConnectionString("MySqlConnection"),

@@ -10,8 +10,8 @@
     </div>
     @if (Model.User.Role == blog_rpg.Models.Enums.UserRole.Author || 1 == 1)
     {
-        <div class="container-custom-out-spac btn">
-            <button asp-route="talecreation" type="button" value="Create">Adicionar novo conto</button>
+        <div class="container-custom-out-spac flex-display justify-content-center">
+            <a asp-route="talecreation" class="btn btn-primary">Adicionar novo conto</a>
         </div>
     }
     <div class="tales-ext-container tales-border">
