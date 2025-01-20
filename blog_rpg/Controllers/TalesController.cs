@@ -16,10 +16,10 @@ namespace blog_rpg.Controllers
             _userService = userService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var user = _userService.Get(1);
-            var tales = _taleService.GetAll();
+            var user = await _userService.GetAsync(1);
+            var tales = await _taleService.GetAllAsync();
 
             var viewModel = new TalesViewModel
             {
@@ -81,9 +81,11 @@ namespace blog_rpg.Controllers
             return null;
         }
 
+        /*
         private bool TaleExists(int id)
         {
             return _taleService.GetAll().Any(x => x.Id == id);
         }
+        */
     }
 }

@@ -13,12 +13,12 @@
             EditDate = editDate;
         }
 
-        public int Id { get; init; }
+        public int Id { get; set; }
         public User Author { get; set; }
         public int AuthorId { get; set; }
-        public string Title { get; set; } = null!;
-        public string Content { get; set; } = null!;
-        public DateTime PostDate { get; init; }
-        public DateTime EditDate { get; private set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public DateTime PostDate { get; set; }
+        public DateTime EditDate { get; set; }
     }
 }

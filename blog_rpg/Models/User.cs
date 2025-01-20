@@ -11,8 +11,8 @@ namespace blog_rpg.Models
             Role = role;
         }
 
-        public int Id { get; init; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public UserRole Role { get; private set; }
+        public UserRole Role { get; set; }
     }
 }

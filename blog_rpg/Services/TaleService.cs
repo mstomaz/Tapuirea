@@ -1,5 +1,6 @@
 ﻿using blog_rpg.Data;
 using blog_rpg.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace blog_rpg.Services
 {
@@ -12,9 +13,9 @@ namespace blog_rpg.Services
             _context = context;
         }
 
-        public IEnumerable<Tale> GetAll()
+        public async Task<IEnumerable<Tale>> GetAllAsync()
         {
-            return _context.Tales;
+            return await _context.Tales.ToListAsync();
         }
     }
 }

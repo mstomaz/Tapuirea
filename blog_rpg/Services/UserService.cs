@@ -12,9 +12,9 @@ namespace blog_rpg.Services
             _context = context;
         }
 
-        public User Get(int id)
+        public async Task<User> GetAsync(int id)
         {
-            return _context.Users.FirstOrDefault(x => x.Id == id);
+            return await _context.Users.FindAsync(id);
         }
     }
 }
