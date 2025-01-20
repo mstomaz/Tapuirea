@@ -15,7 +15,9 @@ namespace blog_rpg.Services
 
         public async Task<IEnumerable<Tale>> GetAllAsync()
         {
-            return await _context.Tales.ToListAsync();
+            return await _context.Tales
+                .Include(tale => tale.Tags)
+                .ToListAsync();
         }
     }
 }

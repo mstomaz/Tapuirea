@@ -1,4 +1,5 @@
 ﻿using blog_rpg.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace blog_rpg.Models
 {
@@ -11,8 +12,13 @@ namespace blog_rpg.Models
             Role = role;
         }
 
+        [Required]
         public int Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public UserRole Role { get; set; }
     }
 }

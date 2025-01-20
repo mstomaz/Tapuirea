@@ -20,6 +20,24 @@
             {
                 <p>Estranho... não há nada aqui!</p>
             }
+            else
+            {
+                @foreach (var tale in Model.Tales)
+                {
+                    <div class="flex-display">
+                        <div class="tale-header-container-title flex-display">
+                            <a class="tale-title" href="#">@tale.Title</a>
+                        </div>
+                        <div class="tale-header-container-date flex-display tale-date">
+                            <p>Data de postagem: @tale.PostDate</p>
+                            @if (tale.EditDate != null)
+                            {
+                                <p>Editado em: @tale.EditDate</p>
+                            }
+                        </div>
+                    </div>
+                }
+            }
         </div>
     </div>
 </div>

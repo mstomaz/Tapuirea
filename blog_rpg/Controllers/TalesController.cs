@@ -16,6 +16,7 @@ namespace blog_rpg.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var user = await _userService.GetAsync(1);

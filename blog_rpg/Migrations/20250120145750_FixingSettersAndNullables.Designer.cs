@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using blog_rpg.Data;
 
@@ -11,9 +12,11 @@ using blog_rpg.Data;
 namespace blog_rpg.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20250120145750_FixingSettersAndNullables")]
+    partial class FixingSettersAndNullables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,28 +51,6 @@ namespace blog_rpg.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("blog_rpg.Models.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("TaleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TaleId");
-
-                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("blog_rpg.Models.Tale", b =>
@@ -137,13 +118,6 @@ namespace blog_rpg.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("blog_rpg.Models.Tag", b =>
-                {
-                    b.HasOne("blog_rpg.Models.Tale", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("TaleId");
-                });
-
             modelBuilder.Entity("blog_rpg.Models.Tale", b =>
                 {
                     b.HasOne("blog_rpg.Models.User", "Author")
@@ -153,11 +127,6 @@ namespace blog_rpg.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("blog_rpg.Models.Tale", b =>
-                {
-                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }
