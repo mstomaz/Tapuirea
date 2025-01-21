@@ -35,7 +35,11 @@ namespace blog_rpg.Controllers
             return null;
         }
 
-        [Route("/Tales/Create", Name = "talecreation")]
+        public IActionResult Read(int? id)
+        {
+            return View();
+        }
+
         public IActionResult Create()
         {
             //ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");

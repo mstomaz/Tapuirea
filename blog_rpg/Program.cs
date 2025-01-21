@@ -1,5 +1,8 @@
 using blog_rpg.Data;
+using blog_rpg.Routing;
 using blog_rpg.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace blog_rpg
@@ -12,6 +15,10 @@ namespace blog_rpg
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.Configure<RouteOptions>(options =>
+            {
+                options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+            });
             builder.Services.AddScoped<SeedingService>();
             builder.Services.AddScoped<TaleService>();
             builder.Services.AddScoped<UserService>();
@@ -20,6 +27,8 @@ namespace blog_rpg
                 builder.Configuration.GetConnectionString("MySqlConnection"),
                 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MySqlConnection"))
             ));
+
+            builder.Services.AddHealthChecks();
 
             var app = builder.Build();
 
@@ -39,7 +48,7 @@ namespace blog_rpg
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -47,9 +56,11 @@ namespace blog_rpg
 
             app.UseAuthorization();
 
+            app.MapHealthChecks("/healthz");
+
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller:slugify=Home}/{action:slugify=Index}/{view:slugify?}");
 
             app.Run();
         }

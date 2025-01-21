@@ -11,7 +11,7 @@
     @if (Model.User.Role == blog_rpg.Models.Enums.UserRole.Author || 1 == 1)
     {
         <div class="container-custom-out-spac flex-display justify-content-center">
-            <a asp-route="talecreation" class="btn btn-primary">Adicionar novo conto</a>
+            <a asp-action="Create" class="btn btn-primary">Adicionar novo conto</a>
         </div>
     }
     <div class="tales-ext-container tales-border">
@@ -26,7 +26,7 @@
                 {
                     <div class="flex-display">
                         <div class="tale-header-container-title flex-display">
-                            <a class="tale-title" href="#">@tale.Title</a>
+                            <a class="tale-title" asp-route-view="@tale.Title-@tale.Id" asp-action="Read">@tale.Title</a>
                         </div>
                         <div class="tale-header-container-date flex-display tale-date">
                             <p>Data de postagem: @tale.PostDate</p>
