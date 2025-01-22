@@ -2,7 +2,7 @@
 {
     public class TalesViewModel
     {
-        public User User { get; set; }
-        public IEnumerable<Tale> Tales { get; set; }
+        public User User { get; set; } = null!;
+        public IEnumerable<Tale> Tales { get; set; } = null!;
     }
 }

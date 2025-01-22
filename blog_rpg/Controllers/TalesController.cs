@@ -30,12 +30,12 @@ namespace blog_rpg.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             return null;
         }
 
-        public IActionResult Read(int? id)
+        public IActionResult Read(int id)
         {
             return View();
         }

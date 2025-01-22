@@ -4,7 +4,7 @@ namespace blog_rpg.Models
 {
     public class Tag
     {
-        public Tag() { }
+        private Tag() { }
 
         public Tag(int id, string name) 
         {
@@ -16,6 +16,8 @@ namespace blog_rpg.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        [StringLength(30, ErrorMessage = "O {0} ultrapassa {1} caracteres")]
+        [Display(Name = "Nome")]
+        public string Name { get; set; } = null!;
     }
 }

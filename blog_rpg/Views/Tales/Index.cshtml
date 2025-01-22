@@ -26,7 +26,7 @@
                 {
                     <div class="flex-display">
                         <div class="tale-header-container-title flex-display">
-                            <a class="tale-title" asp-route-view="@tale.Title-@tale.Id" asp-action="Read">@tale.Title</a>
+                            <a class="tale-title" asp-route-view="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">@tale.Title</a>
                         </div>
                         <div class="tale-header-container-date flex-display tale-date">
                             <p>Data de postagem: @tale.PostDate</p>

@@ -59,8 +59,11 @@ namespace blog_rpg
             app.MapHealthChecks("/healthz");
 
             app.MapControllerRoute(
+                name: "taleRead",
+                pattern: "{controller:slugify=Tales}/{action:slugify=Read}/{view:slugify}.{id}");
+            app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller:slugify=Home}/{action:slugify=Index}/{view:slugify?}");
+                pattern: "{controller:slugify=Home}/{action:slugify=Index}");
 
             app.Run();
         }
