@@ -22,10 +22,14 @@ namespace blog_rpg.Controllers
             var user = await _userService.GetAsync(1);
             var tales = await _taleService.GetAllAsync();
 
+            var userDTO = (UserDTO)user;
+
+            var talesDTO = tales.Select(tales => (TaleDTO)tales).ToList();
+
             var viewModel = new TalesViewModel
             {
-                Tales = tales,
-                User = user
+                Tales = talesDTO,
+                User = userDTO
             };
             return View(viewModel);
         }

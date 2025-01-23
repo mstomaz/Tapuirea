@@ -22,16 +22,11 @@ namespace blog_rpg.Models
         public int AuthorId { get; set; }
 
         [Required]
-        [Display(Name = "Conteúdo")]
         public string Content { get; set; } = null!;
 
         [Required]
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Data de postagem")]
         public DateTime PostDate { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Editado em:")]
         public DateTime? EditDate { get; set; }
     }
 }

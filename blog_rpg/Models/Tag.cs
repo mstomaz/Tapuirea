@@ -16,8 +16,7 @@ namespace blog_rpg.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(30, ErrorMessage = "O {0} ultrapassa {1} caracteres")]
-        [Display(Name = "Nome")]
+        [StringLength(30)]
         public string Name { get; set; } = null!;
     }
 }
