@@ -4,40 +4,50 @@
     ViewData["Title"] = "Contos";
 }
 
-<div class="center-view">
-    <div>
-        <h1 class="text-center">@ViewData["Title"]</h1>
+<div class="title">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+</div>
+@if (false)
+{
+    <div class="container-custom-out-spac flex-display justify-content-center">
+        <a asp-action="Create" class="btn btn-primary">Adicionar novo conto</a>
     </div>
-    @if (1 == 1)
-    {
-        <div class="container-custom-out-spac flex-display justify-content-center">
-            <a asp-action="Create" class="btn btn-primary">Adicionar novo conto</a>
-        </div>
-    }
-    <div class="tales-ext-container tales-border">
-        <div class="tales-int-container tales-border text-center">
+}
+<div class="tales-container">
+
+    <div class="tales-list-container">
+        <ul class="tales-list">
             @if (!Model.Tales.Any())
             {
-                <p>Estranho... não há nada aqui!</p>
+                <li>Estranho... não há nada aqui!</li>
             }
             else
             {
                 @foreach (var tale in Model.Tales)
                 {
-                    <div class="flex-display">
-                        <div class="tale-header-container-title flex-display">
-                            <a class="tale-title" asp-route-view="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">@tale.Title</a>
+                    <li class="tale-list-item">
+                        <div class="tale-post-container">
+                            <a class="tale-title" asp-route-view="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">
+                                @tale.Title
+                            </a>
+                            <div class="tale-post-details">
+                                <a class="tale-author" href="#">
+                                    @tale.Author!.Name
+                                </a>
+                                <a class="tale-date" href="#">
+                                    @Html.DisplayFor(t => t.Tales.First(t => tale.Id == t.Id).PostDate)
+                                </a>
+                                @if (tale.EditDate != null)
+                                {
+                                    <a class="tale-date" href="#">
+                                        @Html.DisplayFor(t => t.Tales.First(t => tale.Id == t.Id).EditDate)
+                                    </a>
+                                }
+                            </div>
                         </div>
-                        <div class="tale-header-container-date flex-display tale-date">
-                            <p>Data de postagem: @tale.PostDate</p>
-                            @if (tale.EditDate != null)
-                            {
-                                <p>Editado em: @tale.EditDate</p>
-                            }
-                        </div>
-                    </div>
+                    </li>
                 }
             }
-        </div>
+        </ul>
     </div>
 </div>

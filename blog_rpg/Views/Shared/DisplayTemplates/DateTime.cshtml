@@ -1,0 +1,14 @@
+﻿@model DateTime
+
+@{
+    var dateFormat = new DateTimeFormatInfo();
+}
+
+@if (Model.Date == DateTime.Today)
+{
+    <span>Hoje às @Model.ToShortTimeString()</span>
+}
+else
+{
+    <span>@Model.ToString($"dd, {dateFormat.GetAbbreviatedMonthName(Model.Month)} yyyy")</span>
+}
