@@ -40,6 +40,20 @@ namespace blog_rpg.Models
         public DateTime? EditDate { get; set; }
         public IEnumerable<Tag> Tags { get; set; } = new List<Tag>();
 
+        public string Summary
+        {
+            get
+            {
+                const int maxLength = 200;
+                if (string.IsNullOrEmpty(Content))
+                    return string.Empty;
+
+                var trimmed = Content.Trim()[..maxLength];
+                var lastSpace = trimmed.LastIndexOf(' ');
+                return lastSpace > 0 ? string.Concat(trimmed.AsSpan(0, lastSpace), "...") : trimmed;
+            }
+        }
+
         public static implicit operator TaleDTO(Tale model)
         {
             return new TaleDTO(

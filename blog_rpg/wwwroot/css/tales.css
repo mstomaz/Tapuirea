@@ -50,7 +50,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     position: relative;
-    bottom: 0.5rem;
+    bottom: 0.3rem;
 }
 
 .tale-author {
@@ -59,9 +59,24 @@
     text-decoration: none;
 }
 
+.user-profile-box{
+    display: none;
+}
+
 .tale-date {
     font-size: 0.8rem;
     margin-left: 0.5rem;
     color: peru;
     text-decoration: none;
+}
+
+.tale-content-summary {
+    text-decoration: none;
+    color: grey;
+    width: 150%;
+}
+
+.tale-content-summary:hover {
+    background-color: #ab9d8c;
+    color: black;
 }

@@ -34,6 +34,9 @@
                                 <a class="tale-author" href="#">
                                     @tale.Author!.Name
                                 </a>
+                                <div class="user-profile-box">
+                                    <p>Placeholder para perfil do usuário</p>
+                                </div>
                                 <a class="tale-date" href="#">
                                     @Html.DisplayFor(t => t.Tales.First(t => tale.Id == t.Id).PostDate)
                                 </a>
@@ -44,6 +47,13 @@
                                     </a>
                                 }
                             </div>
+                            <a class="tale-content-summary" asp-route-view="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">
+                                <div>
+                                    <P>
+                                        @tale.Summary
+                                    </P>
+                                </div>
+                            </a>
                         </div>
                     </li>
                 }
