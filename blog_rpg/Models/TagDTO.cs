@@ -18,7 +18,7 @@ namespace blog_rpg.Models
         [Display(Name = "Nome")]
         public string Name { get; set; } = null!;
 
-        public static implicit operator TagDTO(Tag model)
+        public static explicit operator TagDTO(Tag model)
         {
             return new TagDTO(model.Id, model.Name);
         }

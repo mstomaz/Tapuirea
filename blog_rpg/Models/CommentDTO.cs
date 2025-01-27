@@ -33,7 +33,7 @@ namespace blog_rpg.Models
         [Display(Name = "Editado em:")]
         public DateTime? EditDate { get; set; }
 
-        public static implicit operator CommentDTO(Comment model)
+        public static explicit operator CommentDTO(Comment model)
         {
             return new CommentDTO(
                 model.Id,

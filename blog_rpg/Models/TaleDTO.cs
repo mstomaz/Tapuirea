@@ -54,7 +54,7 @@ namespace blog_rpg.Models
             }
         }
 
-        public static implicit operator TaleDTO(Tale model)
+        public static explicit operator TaleDTO(Tale model)
         {
             return new TaleDTO(
                 model.Id,
