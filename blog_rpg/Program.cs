@@ -4,6 +4,8 @@ using blog_rpg.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace blog_rpg
 {
@@ -15,18 +17,45 @@ namespace blog_rpg
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
             builder.Services.Configure<RouteOptions>(options =>
             {
                 options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
             });
+
             builder.Services.AddScoped<SeedingService>();
             builder.Services.AddScoped<TaleService>();
             builder.Services.AddScoped<UserService>();
+
             builder.Services.AddDbContext<BlogContext>(options =>
-            options.UseMySql(
-                builder.Configuration.GetConnectionString("MySqlConnection"),
-                ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MySqlConnection"))
+                options.UseMySql(
+                    builder.Configuration.GetConnectionString("MySqlConnection"),
+                    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MySqlConnection"))
             ));
+            builder.Services.AddDbContext<UserAuthContext>(options =>
+                options.UseMySql(
+                    builder.Configuration.GetConnectionString("UserAuthContextConnection"),
+                    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("UserAuthContextConnection"))
+            ));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(
+                options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UserAuthContext>();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 8;
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+
+                options.SignIn.RequireConfirmedEmail = true;
+            });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            });
 
             builder.Services.AddHealthChecks();
 
@@ -54,6 +83,7 @@ namespace blog_rpg
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapHealthChecks("/healthz");
