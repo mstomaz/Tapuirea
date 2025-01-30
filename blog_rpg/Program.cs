@@ -1,11 +1,10 @@
 using blog_rpg.Data;
 using blog_rpg.Routing;
 using blog_rpg.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using blog_rpg.Areas.Identity.Data;
+using blog_rpg.Areas.Identity.Models;
 
 namespace blog_rpg
 {
@@ -15,7 +14,6 @@ namespace blog_rpg
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             builder.Services.Configure<RouteOptions>(options =>
@@ -38,8 +36,10 @@ namespace blog_rpg
                     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("UserAuthContextConnection"))
             ));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(
-                options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UserAuthContext>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+                options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<UserAuthContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
@@ -70,7 +70,6 @@ namespace blog_rpg
                 }
             }
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -90,10 +89,10 @@ namespace blog_rpg
 
             app.MapControllerRoute(
                 name: "taleRead",
-                pattern: "{controller:slugify=Tales}/{action:slugify=Read}/{view:slugify}.{id}");
+                pattern: "{controller:slugify}/{action:slugify}/{view:slugify}.{id}");
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller:slugify=Home}/{action:slugify=Index}");
+                pattern: "{controller:slugify=home}/{action:slugify=index}");
 
             app.Run();
         }

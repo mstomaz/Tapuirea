@@ -1,11 +1,10 @@
-﻿using blog_rpg.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using blog_rpg.Areas.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace blog_rpg.Data;
+namespace blog_rpg.Areas.Identity.Data;
 
-public class UserAuthContext : IdentityDbContext<IdentityUser>
+public class UserAuthContext : IdentityDbContext<ApplicationUser>
 {
     public UserAuthContext(DbContextOptions<UserAuthContext> options)
         : base(options)

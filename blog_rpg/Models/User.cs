@@ -20,6 +20,13 @@ namespace blog_rpg.Models
         [StringLength(100)]
         public string Name { get; set; } = null!;
 
+        [Required]
+        public string Password { get; set; } = null!;
+
+        [Required]
+        [RegularExpression("^[a-zA-Z]{1}[\\.\\w-_]+@[a-z[A-Z]+\\.com", ErrorMessage = "Email inválido")]
+        public string Email { get; set; } = null!;
+
 
         [Required]
         public UserRole Role { get; set; }

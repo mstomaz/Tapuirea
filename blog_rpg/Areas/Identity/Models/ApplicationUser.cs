@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace blog_rpg.Areas.Identity.Data;
+namespace blog_rpg.Areas.Identity.Models;
 
 // Add profile data for application users by adding properties to the IdentityUser class
-public class UserAuth : IdentityUser
+public class ApplicationUser : IdentityUser
 {
 }
 
