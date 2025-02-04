@@ -1,10 +1,15 @@
+using blog_rpg.Areas.Identity.Data;
+using blog_rpg.Areas.Identity.Models;
 using blog_rpg.Data;
 using blog_rpg.Routing;
 using blog_rpg.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using blog_rpg.Areas.Identity.Data;
-using blog_rpg.Areas.Identity.Models;
+using System.Globalization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Options;
+using blog_rpg.Localization;
 
 namespace blog_rpg
 {
@@ -15,15 +20,6 @@ namespace blog_rpg
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
-
-            builder.Services.Configure<RouteOptions>(options =>
-            {
-                options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-            });
-
-            builder.Services.AddScoped<SeedingService>();
-            builder.Services.AddScoped<TaleService>();
-            builder.Services.AddScoped<UserService>();
 
             builder.Services.AddDbContext<BlogContext>(options =>
                 options.UseMySql(
@@ -36,13 +32,34 @@ namespace blog_rpg
                     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("UserAuthContextConnection"))
             ));
 
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new CultureInfo[]
+                {
+                    new("pt-BR"),
+                    new("en-US")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("pt-BR");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+            builder.Services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
                 options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<UserAuthContext>()
+                .AddErrorDescriber<LocalizedIdentityErrorDescriber>()
                 .AddDefaultTokenProviders();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
+                options.User.RequireUniqueEmail = true;
+
                 options.Password.RequiredLength = 8;
 
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -57,7 +74,21 @@ namespace blog_rpg
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
             });
 
+            builder.Services.Configure<RouteOptions>(options =>
+            {
+                options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+            });
+
+            builder.Services.AddScoped<SeedingService>();
+            builder.Services.AddScoped<TaleService>();
+            builder.Services.AddScoped<UserService>();
+
             builder.Services.AddHealthChecks();
+
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
+
 
             var app = builder.Build();
 
@@ -79,6 +110,9 @@ namespace blog_rpg
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>()!.Value;
+            app.UseRequestLocalization(locOptions);
 
             app.UseRouting();
 

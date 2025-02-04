@@ -17,17 +17,17 @@ namespace blog_rpg.Models
         [Required]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo '{0}' não pode ser vazio")]
         [Display(Name = "Nome")]
-        [StringLength(100, ErrorMessage = "O {0} ultrapassa {1} caracteres")]
+        [StringLength(100, ErrorMessage = "O {0} ultrapassa {1} caracteres.")]
         public string Name { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "O campo '{0}' não pode ser vazio")]
         [Display(Name = "Senha")]
         public string Password { get; set; } = null!;
 
-        [Required]
-        [RegularExpression("^[a-zA-Z]{1}[\\.\\w-_]+@[a-z[A-Z]+\\.com", ErrorMessage = "Email inválido")]
+        [Required(ErrorMessage = "O campo '{0}' não pode ser vazio")]
+        [RegularExpression("^[a-zA-Z]{1}[\\.\\w-_]+@[a-z[A-Z]+\\.com", ErrorMessage = "Email inválido.")]
         public string Email { get; set; } = null!;
 
         [Required]
