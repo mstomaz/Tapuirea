@@ -6,7 +6,7 @@ namespace blog_rpg.Models
     public class User
     {
         private User() { }
-        public User(int id, string name, UserRole role)
+        public User(string id, string name, UserRole role)
         {
             Id = id;
             Name = name;
@@ -14,7 +14,7 @@ namespace blog_rpg.Models
         }
 
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [StringLength(100)]

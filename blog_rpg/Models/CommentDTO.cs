@@ -18,7 +18,7 @@ namespace blog_rpg.Models
         public UserDTO? Author { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         [Required]
         [Display(Name = "Conteúdo")]

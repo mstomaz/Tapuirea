@@ -77,5 +77,14 @@ namespace blog_rpg.Localization
                 Description = _localizer["PasswordRequiresDigit"]
             };
         }
+
+        public override IdentityError InvalidEmail(string? email)
+        {
+            return new IdentityError
+            {
+                Code = nameof(InvalidEmail),
+                Description = _localizer["InvalidEmail", string.IsNullOrEmpty(email) ? "" : email]
+            };
+        }
     }
 }

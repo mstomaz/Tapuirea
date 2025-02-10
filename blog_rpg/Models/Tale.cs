@@ -21,7 +21,7 @@ namespace blog_rpg.Models
         public User? Author { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         [Required]
         [StringLength(50)]

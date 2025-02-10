@@ -10,6 +10,8 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 using blog_rpg.Localization;
+using blog_rpg.ErrorDescribers.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace blog_rpg
 {
@@ -82,6 +84,13 @@ namespace blog_rpg
             builder.Services.AddScoped<SeedingService>();
             builder.Services.AddScoped<TaleService>();
             builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<UserErrorDescriber>();
+
+            builder.Services.Configure<MvcOptions>(options =>
+            {
+                options.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
+                    (fieldName) => $"O campo '{fieldName}' não pode ser vazio.");
+            });
 
             builder.Services.AddHealthChecks();
 
@@ -123,7 +132,7 @@ namespace blog_rpg
 
             app.MapControllerRoute(
                 name: "taleRead",
-                pattern: "{controller:slugify}/{action:slugify}/{view:slugify}.{id}");
+                pattern: "{controller:slugify}/{action:slugify}/{title:slugify}.{id}");
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller:slugify=home}/{action:slugify=index}");

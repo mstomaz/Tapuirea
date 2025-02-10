@@ -27,7 +27,7 @@
                 {
                     <li class="tale-list-item">
                         <div class="tale-post-container">
-                            <a class="tale-title" asp-route-view="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">
+                            <a class="tale-title" asp-route-title="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">
                                 @tale.Title
                             </a>
                             <div class="tale-post-details">
@@ -47,7 +47,7 @@
                                     </a>
                                 }
                             </div>
-                            <a class="tale-content-summary" asp-route-view="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">
+                            <a class="tale-content-summary" asp-route-title="@tale.Title" asp-route-id="@tale.Id" asp-action="Read">
                                 <div>
                                     <P>
                                         @tale.Summary

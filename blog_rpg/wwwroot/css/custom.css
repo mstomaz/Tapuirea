@@ -24,3 +24,7 @@
 .page-title {
     margin-bottom: 5rem;
 }
+
+.inline-display {
+    display: inline-block;
+}
