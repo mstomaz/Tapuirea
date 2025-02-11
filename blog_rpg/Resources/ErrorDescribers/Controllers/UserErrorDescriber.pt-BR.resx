@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PasswordHas123Sequence" xml:space="preserve">
+    <value>Senhas não podem conter a sequência '123'.</value>
+  </data>
+  <data name="PasswordHasUserName" xml:space="preserve">
+    <value>Senhas não podem conter o nome de usuário.</value>
+  </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>Usuário não encontrado.</value>
   </data>

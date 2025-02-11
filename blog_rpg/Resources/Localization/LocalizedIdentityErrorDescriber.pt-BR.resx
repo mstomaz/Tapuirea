@@ -126,6 +126,9 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>O email '{0}' é inválido.</value>
   </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>O nome de usuário '{0}' é inválido. Por favor, use somente letras e números.</value>
+  </data>
   <data name="PasswordRequiresDigit" xml:space="preserve">
     <value>Senhas devem ter no mínimo um caractere numérico.</value>
   </data>

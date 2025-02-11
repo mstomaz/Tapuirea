@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace blog_rpg.Localization
 {
@@ -84,6 +85,15 @@ namespace blog_rpg.Localization
             {
                 Code = nameof(InvalidEmail),
                 Description = _localizer["InvalidEmail", string.IsNullOrEmpty(email) ? "" : email]
+            };
+        }
+
+        public override IdentityError InvalidUserName(string? userName)
+        {
+            return new IdentityError
+            {
+                Code = nameof(InvalidUserName),
+                Description = _localizer["InvalidUserName", string.IsNullOrEmpty(userName) ? "" : userName]
             };
         }
     }

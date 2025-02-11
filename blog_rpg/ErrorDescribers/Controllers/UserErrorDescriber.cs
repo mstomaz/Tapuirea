@@ -19,5 +19,23 @@ namespace blog_rpg.ErrorDescribers.Controllers
                 Description = _localizer["UserNotFound"]
             };
         }
+
+        public AppError PasswordHasUserName()
+        {
+            return new AppError
+            {
+                Code = nameof(PasswordHasUserName),
+                Description = _localizer["PasswordHasUserName"]
+            };
+        }
+
+        public AppError PasswordHas123Sequence()
+        {
+            return new AppError
+            {
+                Code = nameof(PasswordHas123Sequence),
+                Description = _localizer["PasswordHas123Sequence"]
+            };
+        }
     }
 }

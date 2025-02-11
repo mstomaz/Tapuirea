@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using blog_rpg.Localization;
 using blog_rpg.ErrorDescribers.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using blog_rpg.IdentityPolicy;
 
 namespace blog_rpg
 {
@@ -61,12 +62,10 @@ namespace blog_rpg
             builder.Services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 options.Password.RequiredLength = 8;
-
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
-
                 options.SignIn.RequireConfirmedEmail = true;
             });
 
@@ -85,6 +84,8 @@ namespace blog_rpg
             builder.Services.AddScoped<TaleService>();
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<UserErrorDescriber>();
+
+            builder.Services.AddTransient<IPasswordValidator<ApplicationUser>, CustomPasswordPolicy>();
 
             builder.Services.Configure<MvcOptions>(options =>
             {
