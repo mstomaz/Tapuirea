@@ -11,6 +11,7 @@ namespace blog_rpg.Models.ViewModel
 
         [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
         [Display(Name = "Senha")]
+        [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
         [Required(ErrorMessage = "O campo '{0}' é obrigatório")]

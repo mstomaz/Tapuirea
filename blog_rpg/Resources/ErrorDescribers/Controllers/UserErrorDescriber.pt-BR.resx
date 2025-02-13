@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Falha no Login: Email ou senha inválidos.</value>
+  </data>
   <data name="PasswordHas123Sequence" xml:space="preserve">
     <value>Senhas não podem conter a sequência '123'.</value>
   </data>

@@ -2,24 +2,29 @@
 using blog_rpg.ErrorDescribers.Controllers;
 using blog_rpg.Models;
 using blog_rpg.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace blog_rpg.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
         private readonly IStringLocalizer<UserErrorDescriber> _userErrorLocalizer;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountController(UserManager<ApplicationUser> userManager, IPasswordHasher<ApplicationUser> passwordHasher,
-            IStringLocalizer<UserErrorDescriber> userErrorLocalizer)
+            IStringLocalizer<UserErrorDescriber> userErrorLocalizer, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _passwordHasher = passwordHasher;
             _userErrorLocalizer = userErrorLocalizer;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -28,9 +33,11 @@ namespace blog_rpg.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Create() => View();
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Create(CreateUserViewModel user)
         {
             if (ModelState.IsValid)
@@ -119,6 +126,43 @@ namespace blog_rpg.Controllers
         {
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login(string? returnUrl)
+        {
+            Login login = new()
+            {
+                ReturnUrl = returnUrl
+            };
+            return View(login);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(Login login)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser? user = login.Email != null ? await _userManager.FindByEmailAsync(login.Email) : null;
+                if (user != null && login.Password != null)
+                {
+                    await _signInManager.SignOutAsync();
+                    SignInResult result = await _signInManager.PasswordSignInAsync(user, login.Password, login.Remember, false);
+                    if (result.Succeeded)
+                        return Redirect(login.ReturnUrl ?? "/");
+                }
+                ModelState.AddModelError(nameof(login.Email), _userErrorLocalizer["LoginFailed"]);
+            }
+            return View(login);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index), "Home");
         }
     }
 }

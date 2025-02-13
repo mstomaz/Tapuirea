@@ -66,13 +66,16 @@ namespace blog_rpg
                 options.Password.RequiredLength = 8;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedAccount = false;
             });
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
+                options.Cookie.Name = ".AspNetCore.Identity.Application";
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                options.SlidingExpiration = true;
             });
 
             builder.Services.Configure<RouteOptions>(options =>

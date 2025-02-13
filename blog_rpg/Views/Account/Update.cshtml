@@ -4,9 +4,8 @@
 }
 
 <h1 class="bg-info text-white">@ViewData["Title"]</h1>
-<a asp-action="Index" class="btn btn-secondary">Voltar</a>
-<div asp-validation-summary="All" class="text-danger"></div>
 
+<div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Update" method="post">
     <div class="form-group">
         <input asp-for="Id" type="hidden" />

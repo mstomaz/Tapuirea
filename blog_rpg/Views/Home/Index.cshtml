@@ -1,3 +1,14 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using blog_rpg.Areas.Identity.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
     ViewData["Title"] = "Página Inicial";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Olá, @UserManager.GetUserName(User)!</h1>
 }

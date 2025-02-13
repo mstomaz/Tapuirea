@@ -1,6 +1,7 @@
 ﻿using blog_rpg.Models;
 using blog_rpg.Models.ViewModel;
 using blog_rpg.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace blog_rpg.Controllers
@@ -19,7 +20,7 @@ namespace blog_rpg.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var user = await _userService.GetAsync(1);
+            var user = await _userService.GetAsync("1");
             var tales = await _taleService.GetAllAsync();
 
             var userDTO = (UserDTO)user;
@@ -44,6 +45,7 @@ namespace blog_rpg.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             //ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
