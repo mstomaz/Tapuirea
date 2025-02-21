@@ -7,7 +7,7 @@
 <div class="title">
     <h1 class="text-center">@ViewData["Title"]</h1>
 </div>
-@if (true)
+@if (User?.Identity?.IsAuthenticated ?? false)
 {
     <div class="container-custom-out-spac flex-display justify-content-center">
         <a asp-action="Create" class="btn btn-primary">Adicionar novo conto</a>

@@ -164,5 +164,10 @@ namespace blog_rpg.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Index), "Home");
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
