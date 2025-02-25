@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using blog_rpg.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using blog_rpg.Areas.Identity.Data;
 namespace blog_rpg.Migrations.UserAuth
 {
     [DbContext(typeof(UserAuthContext))]
-    partial class UserAuthContextModelSnapshot : ModelSnapshot
+    [Migration("20250224191919_UpdatinUserModel")]
+    partial class UpdatinUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -18,7 +18,7 @@ namespace blog_rpg.Data
 
             if (!_context.Users.Any() || !_context.Tales.Any())
             {
-                User u1 = new User("1", "Mateus", Models.Enums.UserRole.Author);
+                User u1 = new User("1", "Mateus", Models.Enums.UserRole.Author, Models.Enums.Country.Brazil, new DateTime(2000, 1, 2));
                 _context.Users.Add(u1);
                 _context.SaveChanges();
 

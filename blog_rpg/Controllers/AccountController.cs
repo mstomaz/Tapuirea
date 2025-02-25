@@ -45,7 +45,9 @@ namespace blog_rpg.Controllers
                 ApplicationUser appUser = new()
                 {
                     UserName = user.Name,
-                    Email = user.Email
+                    Email = user.Email,
+                    Country = user.Country,
+                    BirthDate = user.BirthDate
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(appUser, user.Password);
@@ -70,7 +72,9 @@ namespace blog_rpg.Controllers
                 var viewModel = new UpdateUserViewModel
                 {
                     Id = user.Id,
-                    Email = user.Email
+                    Email = user.Email,
+                    Country = user.Country,
+                    BirthDate = user.BirthDate
                 };
 
                 return View(viewModel);
@@ -89,6 +93,9 @@ namespace blog_rpg.Controllers
             else
             {
                 var user = await _userManager.FindByIdAsync(viewModel.Id!);
+
+                user!.BirthDate = viewModel.BirthDate;
+                user!.Country = viewModel.Country;
 
                 if (!string.IsNullOrEmpty(viewModel.Email))
                 {
