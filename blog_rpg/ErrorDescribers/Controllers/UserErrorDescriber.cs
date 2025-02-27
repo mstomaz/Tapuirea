@@ -16,7 +16,7 @@ namespace blog_rpg.ErrorDescribers.Controllers
             return new AppError
             {
                 Code = nameof(UserNotFound),
-                Description = _localizer["UserNotFound"]
+                Description = _localizer["UserNotFound"],
             };
         }
 
