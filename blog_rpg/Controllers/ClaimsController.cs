@@ -92,5 +92,8 @@ namespace blog_rpg.Controllers
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
         }
+
+        [Authorize(Policy = "AspManager")]
+        public IActionResult Project() => View(nameof(Index), User?.Claims);
     }
 }

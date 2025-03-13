@@ -78,6 +78,15 @@ namespace blog_rpg
                 options.SlidingExpiration = true;
             });
 
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AspManager", policy =>
+                {
+                    policy.RequireRole("Manager");
+                    policy.RequireClaim("Coding-Skill", "ASP.NET Core MVC");
+                });
+            });
+
             builder.Services.Configure<RouteOptions>(options =>
             {
                 options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
